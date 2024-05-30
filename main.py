@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
-# отключает графический интерфейс
+# отключает открытие браузера
 chrome_options = Options()
 chrome_options.add_argument('--headless')
 chrome_options.add_argument('--disable-gpu')
@@ -17,6 +17,7 @@ service = Service()
 
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
+# driver = webdriver.Chrome()
 
 print('Введите номер документа:\n 1) Исковое заявление о взыскании задолженности по договору уступки прав требований \n 2) Исковое заявление о взыскании неустойки в связи с нарушением сроков работ \n 3) Исковое заявление о взыскании задолженности по договору поставки')
 id_doc = str(input())
@@ -74,7 +75,8 @@ context = {
     'OGRN2': mp['ОГРН2']
 }
 doc.render(context)
-doc.save("документ.docx")
+doc_name = str(input('Введите название документа: '))
+doc.save(doc_name + ".docx")
 
 
 
